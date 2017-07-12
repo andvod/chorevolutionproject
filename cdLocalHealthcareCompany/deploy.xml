@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:baseservice="http://services.chorevolution.eu/" xmlns:cdlocalhealthcarecompany="http://eu.chorevolution.farmbusinessstartup/cdlocalhealthcarecompany" xmlns:cdprocess="http://eu.chorevolution.farmbusinessstartup/cd/cdLocalHealthcareCompany/process" xmlns:localhealthcarecompany="http://eu.chorevolution.farmbusinessstartup/localhealthcarecompany" xmlns:registryoffice="http://eu.chorevolution.farmbusinessstartup/cdregistryoffice" xmlns:user="http://eu.chorevolution.farmbusinessstartup/cduser" xmlns:veterinary="http://eu.chorevolution.farmbusinessstartup/cdveterinary">
+  <process name="cdprocess:cdLocalHealthcareCompany">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="CDUserLocalHealthcareCompanyPT">
+      <service name="cdlocalhealthcarecompany:UserLocalHealthcareCompanyService" port="UserLocalHealthcareCompanyPort"/>
+    </provide>
+    <provide partnerLink="CDVeterinaryLocalHealthcareCompanyPT">
+      <service name="cdlocalhealthcarecompany:VeterinaryLocalHealthcareCompanyService" port="VeterinaryLocalHealthcareCompanyPort"/>
+    </provide>
+    <provide partnerLink="CDRegistryOfficeLocalHealthcareCompanyPT">
+      <service name="cdlocalhealthcarecompany:RegistryOfficeLocalHealthcareCompanyService" port="RegistryOfficeLocalHealthcareCompanyPort"/>
+    </provide>
+    <invoke partnerLink="LocalHealthcareCompanyPT" usePeer2Peer="false">
+      <service name="localhealthcarecompany:LocalHealthcareCompanyService" port="LocalHealthcareCompanyPort"/>
+    </invoke>
+    <invoke partnerLink="LocalHealthcareCompanyVeterinaryPT" usePeer2Peer="false">
+      <service name="veterinary:LocalHealthcareCompanyVeterinaryService" port="LocalHealthcareCompanyVeterinaryPort"/>
+    </invoke>
+    <invoke partnerLink="LocalHealthcareCompanyRegistryOfficePT" usePeer2Peer="false">
+      <service name="registryoffice:LocalHealthcareCompanyRegistryOfficeService" port="LocalHealthcareCompanyRegistryOfficePort"/>
+    </invoke>
+    <invoke partnerLink="LocalHealthcareCompanyUserPT" usePeer2Peer="false">
+      <service name="user:LocalHealthcareCompanyUserService" port="LocalHealthcareCompanyUserPort"/>
+    </invoke>
+  </process>
+  <process name="baseservice:BaseService">
+    <process-events generate="all"/>
+    <provide partnerLink="ConfigurableService">
+      <service name="baseservice:cdLocalHealthcareCompanyBaseService" port="ConfigurableServicePort"/>
+    </provide>
+  </process>
+</deploy>
